@@ -93,14 +93,6 @@ if ! which aws; then
     exit 1
 fi
 
-tmpdir=$(mktemp -d)
-
-cd "$tmpdir"
-
-git clone -b master https://github.com/widdix/aws-ec2-ssh.git
-
-cd "$tmpdir/aws-ec2-ssh"
-
 cp authorized_keys_command.sh $AUTHORIZED_KEYS_COMMAND_FILE
 cp import_users.sh $IMPORT_USERS_SCRIPT_FILE
 
