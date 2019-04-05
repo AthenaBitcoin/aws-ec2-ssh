@@ -185,6 +185,9 @@ function create_or_update_local_user() {
         /bin/chown -R "${username}:${username}" "$(eval echo ~$username)"
         log "Created new user ${username}"
     fi
+
+    /usr/sbin/usermod -U -s /bin/bash "${username}" || true
+
     /usr/sbin/usermod -a -G "${localusergroups}" "${username}"
 
     # Should we add this user to sudo ?
@@ -211,8 +214,8 @@ function delete_local_user() {
     /usr/bin/pkill -9 -u "${1}" || true
     sleep 1
     # Remove account now that all processes for the user are gone
-    /usr/sbin/userdel -f -r "${1}"
-    log "Deleted user ${1}"
+    #/usr/sbin/userdel -f -r "${1}"
+    log "Disabled user ${1}"
 }
 
 function clean_iam_username() {
